@@ -8,8 +8,8 @@ import Order from './pages/Orders/Order'
 import { ToastContainer} from 'react-toastify';
 
 function App() {
-  const url = import.meta.env.VITE_API_URL
-  // const url = 'http://localhost:4000'
+  // const url = import.meta.env.VITE_API_URL
+  const url = 'http://localhost:4000'
   console.log(url)
   return (
     <div>
