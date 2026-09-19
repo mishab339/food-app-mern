@@ -1,14 +1,16 @@
 
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
-import SideBar from './components/SideBar/SideBar'
+import SideBar from './components/Sidebar/Sidebar'
 import Add from './pages/Add/Add'
 import List from './pages/List/List'
 import Order from './pages/Orders/Order'
 import { ToastContainer} from 'react-toastify';
 
 function App() {
-  const url = "http://localhost:4000"
+  const url = import.meta.env.VITE_API_URL
+  // const url = 'http://localhost:4000'
+  console.log(url)
   return (
     <div>
       <ToastContainer/>
