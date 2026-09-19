@@ -24,8 +24,10 @@ const loginUser = async (req, res) => {
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
+
 const registerUser = async (req, res) => {
   const { name, password, email } = req.body;
+  console.log(req.body)
   try {
     const exist = await userModel.findOne({ email });
     if (exist) {
