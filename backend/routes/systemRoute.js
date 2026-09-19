@@ -1,18 +1,42 @@
 import express from "express";
-const systemRouter = express.Router();
 import path from 'path'
 
+const systemRouter = express.Router();
+
 systemRouter.delete("/admin/clear-images", (req, res) => {
-  const uploadDir = path.join(process.cwd(), "uploads");
+    try {
+        const uploadDir = path.join(process.cwd(), "uploads");
 
-  fs.readdirSync(uploadDir).forEach((file) => {
-    fs.unlinkSync(path.join(uploadDir, file));
-  });
+        if (!fs.existsSync(uploadDir)) {
+            return res.json({
+                success: true,
+                message: "Upload directory does not exist"
+            });
+        }
 
-  res.json({
-    success: true,
-    message: "Images cleared",
-  });
+        const files = fs.readdirSync(uploadDir);
+
+        for (const file of files) {
+            const filePath = path.join(uploadDir, file);
+
+            if (fs.statSync(filePath).isFile()) {
+                fs.unlinkSync(filePath);
+            }
+        }
+
+        res.json({
+            success: true,
+            message: `${files.length} files deleted`
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to clear uploads"
+        });
+    }
 });
 
 export default systemRouter
