@@ -1,7 +1,8 @@
 import express from "express";
 const systemRouter = express.Router();
+import path from 'path'
 
-systemRouter.delete("/api/admin/clear-images", (req, res) => {
+systemRouter.delete("/admin/clear-images", (req, res) => {
   const uploadDir = path.join(process.cwd(), "uploads");
 
   fs.readdirSync(uploadDir).forEach((file) => {
